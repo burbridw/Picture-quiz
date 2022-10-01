@@ -15,6 +15,7 @@ const feelingsArr = ["./images/feelings/img1.png","./images/feelings/img2.png", 
 const numbersArr = ["./images/numbers/img1.png","./images/numbers/img2.png", "./images/numbers/img3.png", "./images/numbers/img4.png", "./images/numbers/img5.png", "./images/numbers/img6.png", "./images/numbers/img7.png", "./images/numbers/img8.png", "./images/numbers/img9.png", "./images/numbers/img10.png", "./images/numbers/img11.png", "./images/numbers/img12.png"]
 const weatherArr = ["./images/weather/img1.png","./images/weather/img2.png", "./images/weather/img3.png", "./images/weather/img4.png", "./images/weather/img5.png", "./images/weather/img6.png"]
 const colorArr = ["./images/colours/img1.png","./images/colours/img2.png", "./images/colours/img3.png", "./images/colours/img4.png", "./images/colours/img5.png", "./images/colours/img6.png", "./images/colours/img7.png", "./images/colours/img8.png", "./images/colours/img9.png","./images/colours/img10.png"]
+const colorTextArr = ["black", "blue", "brown", "green", "orange", "pink", "purple", "red", "white", "yellow"]
 const shapesArr = ["./images/shapes/img1.png","./images/shapes/img2.png", "./images/shapes/img3.png", "./images/shapes/img4.png", "./images/shapes/img5.png", "./images/shapes/img6.png", "./images/shapes/img7.png", "./images/shapes/img8.png"]
 const sportsArr = ["./images/sports/img1.png","./images/sports/img2.png", "./images/sports/img3.png", "./images/sports/img4.png", "./images/sports/img5.png", "./images/sports/img6.png", "./images/sports/img7.png", "./images/sports/img8.png","./images/sports/img9.png","./images/sports/img10.png","./images/sports/img11.png","./images/sports/img12.png","./images/sports/img13.png"]
 const foodsArr = ["./images/foods/img1.png","./images/foods/img2.png", "./images/foods/img3.png", "./images/foods/img4.png", "./images/foods/img5.png", "./images/foods/img6.png", "./images/foods/img7.png", "./images/foods/img8.png", "./images/foods/img9.png", "./images/foods/img10.png", "./images/foods/img11.png", "./images/foods/img12.png", "./images/foods/img13.png", "./images/foods/img14.png", "./images/foods/img15.png", "./images/foods/img16.png", "./images/foods/img17.png", "./images/foods/img18.png", "./images/foods/img19.png"]
@@ -59,6 +60,30 @@ const conditionsArr = ["./images/conditions/img1.png","./images/conditions/img2.
 const descriptionsArr = ["./images/descriptions/img1.png","./images/descriptions/img2.png", "./images/descriptions/img3.png", "./images/descriptions/img4.png", "./images/descriptions/img5.png", "./images/descriptions/img6.png", "./images/descriptions/img7.png", "./images/descriptions/img8.png", "./images/descriptions/img9.png", "./images/descriptions/img10.png", "./images/descriptions/img11.png", "./images/descriptions/img12.png", "./images/descriptions/img13.png", "./images/descriptions/img14.png", "./images/descriptions/img15.png"]
 const jobsArr = ["./images/jobs/img1.png","./images/jobs/img2.png", "./images/jobs/img3.png", "./images/jobs/img4.png", "./images/jobs/img5.png", "./images/jobs/img6.png", "./images/jobs/img7.png", "./images/jobs/img8.png", "./images/jobs/img9.png", "./images/jobs/img10.png", "./images/jobs/img11.png", "./images/jobs/img12.png", "./images/jobs/img13.png", "./images/jobs/img14.png", "./images/jobs/img15.png", "./images/jobs/img16.png", "./images/jobs/img17.png", "./images/jobs/img18.png", "./images/jobs/img19.png", "./images/jobs/img20.png", "./images/jobs/img21.png", "./images/jobs/img22.png", "./images/jobs/img23.png", "./images/jobs/img24.png", "./images/jobs/img25.png"]
 const clubactivitiesArr = ["./images/clubactivities/img1.png","./images/clubactivities/img2.png", "./images/clubactivities/img3.png", "./images/clubactivities/img4.png", "./images/clubactivities/img5.png", "./images/clubactivities/img6.png", "./images/clubactivities/img7.png", "./images/clubactivities/img8.png", "./images/clubactivities/img9.png", "./images/clubactivities/img10.png", "./images/clubactivities/img11.png", "./images/clubactivities/img12.png", "./images/clubactivities/img13.png", "./images/clubactivities/img14.png", "./images/clubactivities/img15.png", "./images/clubactivities/img16.png", "./images/clubactivities/img17.png", "./images/clubactivities/img18.png"]
+
+const testArr = colorArr
+    "black": "./images/colours/img1.png",
+    "green": "./images/colours/img6.png"
+}
+
+console.log( Object.entries(testObj) )
+
+function checkImage() {
+    let checkArr = Object.entries(testObj)
+    console.log(checkArr.length)
+    for (let i = 0; i < checkArr.length; i++) {
+        if (checkArr[i][1] === "./images/colours/img6.png") {
+            console.log(checkArr[i][0])
+        }
+    }
+}
+checkImage()
+
+/*Object.entries(testObj).forEach( (x, y) => {
+    if (y === "./images/colours/img1.png") {
+        console.log(y)
+    }
+})*/
 
 
 const feelingsBtn = document.getElementById("feelings")
@@ -252,6 +277,19 @@ renderBtn.addEventListener("click", function(){
     if (activeArr.length >= 1) {
     renderGame(cardsContainer, activeArr)
     }
+})
+
+let textButtons = document.querySelectorAll(".question-text-button")
+textButtons.forEach( (x) => {
+    x.addEventListener("click",function() {
+        if ( x.textContent === "black") {
+            console.log("correct")
+            x.classList.add("correct-answer")
+        } else {
+            console.log("wrong")
+            x.classList.add("wrong-answer")
+        }
+    })
 })
 
 function renderGame(targetDiv, arr){

@@ -113,12 +113,14 @@ img {
 }
 
 .cards-container {
+  background-color: white;
   position: absolute;
   width: 90%;
   height: 80%;
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
+  border-radius: 10px;
   display: flex;
     flex-wrap: nowrap;
     padding: 0;
@@ -129,6 +131,7 @@ img {
 }
 
 .question-image {
+  border-radius: 10px 0 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,27 +140,47 @@ img {
   border: 1px solid black;
 }
 .question-image img {
-  height: 100%;
+  height: 90%;
   max-height: 500px;
 }
 .question-text {
   width: 30%;
   height: 100%;
+  border-radius: 0 10px 10px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border: 1px solid black;
 }
-.question-text div {
+.question-text-button {
   height: 30%;
-  max-height: 200px;
-  width: 60%;
+  max-height: 100px;
+  width: 80%;
   max-width: 300px;
   border: 2px solid black;
-  border-radius: 15px;
+  border-radius: 50px;
   background-color: white;
   text-align: center;
+  font-size: 70px;
+}
+@media (max-width: 840px) {
+  .question-text div {
+    font-size: 50px;
+  }
+}
+.question-text button {
+  height: 30%;
+  max-height: 100px;
+  width: 80%;
+  max-width: 300px;
+  font-size: 70px;
+}
+.correct-answer {
+  background-color: green;
+}
+.wrong-answer {
+  background-color: red;
 }
 
 .hide-me {
