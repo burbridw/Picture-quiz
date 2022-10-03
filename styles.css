@@ -8,7 +8,10 @@ body {
 .everything {
   height: 98vh;
 }
-
+.score-box {
+  position: absolute;
+  font-size: 30px;
+}
 img {
   height: 100%;
   overflow: hidden;
@@ -29,6 +32,12 @@ img {
   font-family: Tahoma, sans-serif;
   font-size: 2.5rem;
   transition: all 0.2s ease-in-out;
+}
+
+@media (max-width: 800px) {
+  #game-buttons button {
+    font-size: 1rem;
+  }
 }
 #game-buttons button:hover {
   background-color: yellow;
@@ -98,7 +107,11 @@ img {
   font-size: 1.5rem;
   transition: all 0.2s ease-in-out;
 }
-
+@media (max-width: 800px) {
+  .inner-btn-menu button {
+    font-size: 1rem;
+  }
+}
 .inner-btn-menu button:hover {
   background-color: yellow;
 }
@@ -144,6 +157,7 @@ img {
   height: 90%;
   max-height: 500px;
 }
+
 .question-text {
   width: 30%;
   height: 100%;
@@ -154,6 +168,7 @@ img {
   align-items: center;
   border: 1px solid black;
 }
+
 .question-number {
   position: absolute;
   width: 50px;
@@ -173,6 +188,37 @@ img {
   top: 60%;
 }
 
+@media (max-width: 600px) {
+  .cards-container {
+  flex-direction: column;
+  }
+  .question-image-container {
+    height: 70%;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+  }
+  .question-text {
+    width: 100%;
+    height: 30%;
+    flex-direction: row;
+    align-items: flex-start;
+    border-radius: 0 0 10px 10px;
+  }
+  .question-image {
+    width: 100%;
+    max-height: 100%;
+  }
+  .question-number {
+    top: 80%;
+    left: 10%;
+  }
+  .question-number:nth-of-type(2) {
+    top: 80%;
+    left: 80%;
+  }
+}
+
 
 .question-text-button {
   font-family: Tahoma, sans-serif;
@@ -188,6 +234,7 @@ img {
   /*vertical-align: middle;
   line-height:calc(100% + 15px);*/
   font-size: 60px;
+  transition: all 0.3s linear;
 }
 @media (max-width: 1100px) {
   .question-text-button {
@@ -244,19 +291,74 @@ img {
   bottom: 5%;
   transform: translateX(-50%);
   height: 50px;
-  width: 25%;
-  max-width: 300px;
+  width: 45%;
+  max-width: 400px;
   border: 1px solid black;
   border-radius: 20px;
   font-size: 2.5rem;
+  transition: all 0.2s linear;
 }
-
+.next-button:hover {
+  background-color: black;
+}
+.result-container {
+  font-family: Tahoma, sans-serif;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20%;
+  width: 60%;
+  max-width: 400px;
+  height: 30%;
+  max-height: 300px;
+  font-size: 40px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px 3px black;
+  background-color: black;
+  color: white;
+  overflow: hidden;
+}
+@media (max-width: 600px) {
+  .result-container {
+    height: 50%;
+  }
+}
+.result-container div {
+  width: 100%;
+  text-align: center;
+}
+.result-container button {
+  padding: 0;
+  width: 50%;
+  font-family: Tahoma, sans-serif;
+  font-size: 2rem;
+  transition: all 0.2s linear;
+  
+}
+.result-container button:nth-of-type(1) {
+  border-radius: 0 0 0 10px;
+  background-color: lightgreen;
+}
+.result-container button:nth-of-type(2) {
+  border-radius: 0 0 10px 0;
+  background-color: lightblue;
+}
+.result-container button:hover {
+  background-color: orangered;
+  color: white;
+}
 .hide-me {
   display: none;
 }
 .reduced {
   height: 0px;
   border: none;
+  box-shadow: none;
 }
 
 .conceal-menu {

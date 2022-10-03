@@ -6,14 +6,18 @@ let answersArr = []
 let goBackBtn = ""
 let imgList = ""
 let selectionOpen = false
+let answered = false
 let round = 0
 let gameLimit = 0
+let score = 0
 
 const gameBtnDisplay = document.getElementById("game-btn-container")
 const topicBtnDisplay = document.getElementById("topic-btn-container")
 const cardsContainer = document.querySelector(".cards-container")
 const questionImageContainer = document.querySelector(".question-image-container")
 const questionTextBox = document.querySelector(".question-text")
+const resultBox = document.querySelector(".result-container")
+
 
 const feelingsArr = ["./images/feelings/img1.png","./images/feelings/img2.png", "./images/feelings/img3.png", "./images/feelings/img4.png", "./images/feelings/img5.png", "./images/feelings/img6.png", "./images/feelings/img7.png", "./images/feelings/img8.png", "./images/feelings/img9.png","./images/feelings/img10.png"]
 const feelingsTextArr = ["fine", "good", "great", "happy", "sad", "tired", "sleepy", "busy", "hungry", "thirsty"]
@@ -169,6 +173,8 @@ const clubactivitiesBtn = document.getElementById("clubactivities")
 const quickStart = document.getElementById("quick-start")
 const clearBtn = document.getElementById("clear")
 const renderBtn = document.getElementById("render-btn")
+const playAgainButton = document.getElementById("play-again-button")
+const menuButton = document.getElementById("menu-button")
 
 feelingsBtn.addEventListener("click",() => beginSelection(feelingsArr))
 weatherBtn.addEventListener("click",() => beginSelection(weatherArr))
@@ -235,7 +241,7 @@ function renderSelect(targetDiv, arr){
     gameBtnDisplay.className = "hide-me"
     topicBtnDisplay.className = "hide-me"
     let currentDiv = document.getElementById(targetDiv)
-    currentDiv.innerHTML = `<div class="inner-btn-menu"><button id="selectall" onClick="selectAll()">Select All</button><button id="clearselection" onClick="selectClear()">Clear Selection</button><button id="closewindow" onClick="passSelect()">Confirm Selection and Go Back</button></div>`
+    currentDiv.innerHTML = `<div class="inner-btn-menu"><button id="selectall" onClick="selectAll()">All</button><button id="clearselection" onClick="selectClear()">Clear</button><button id="closewindow" onClick="passSelect()">Confirm and Go Back</button></div>`
     for ( let i = 0; i < arr.length; i++) {
     currentDiv.innerHTML += `<div class="img-box"><img class="select-img unselected" src="${arr[i]}"></div>`
     imgList = document.querySelectorAll(`.select-img`)
@@ -301,11 +307,24 @@ quickStart.addEventListener("click",function(){
     renderGame(activeArr)
 })
 
-
 renderBtn.addEventListener("click", function(){
     if (activeArr.length >= 1) {
     renderGame(activeArr)
     }
+})
+
+clearBtn.addEventListener("click",function(){
+    clearAll()
+})
+
+playAgainButton.addEventListener("click",function() {
+    renderGame(activeArr)
+    resultBox.classList.add("reduced")
+})
+
+menuButton.addEventListener("click",function() {
+    clearAll()
+    resultBox.classList.add("reduced")
 })
 
 let textButtons = document.querySelectorAll(".question-text-button")
@@ -316,10 +335,13 @@ textButtons.forEach( (x) => {
         let imageIndex = allImagesArr.indexOf(currentImgSrc)
         let imageText = allTextArr[imageIndex]
         if ( x.textContent === imageText) {
-            console.log("correct")
+            if (!answered) {
+            score++
+            }
+            answered = true
             x.classList.add("correct-answer")
         } else {
-            console.log("wrong")
+            answered = true
             x.classList.add("wrong-answer")
         }
     })
@@ -329,22 +351,23 @@ const nextButton = document.querySelector(".next-button")
 nextButton.addEventListener("click", function() {
     if ( round < gameLimit ) {
     renderNext()
+    } else {
+        renderLast()
     }
 })
 
-
 function renderGame(arr){
     round = 0
+    score = 0
     answersArr = []
     displayArr = []
     displayTextArr = []
-
+    answered = false
     let allTextBoxes = document.querySelectorAll(".question-text-button")
     allTextBoxes.forEach( (x) => {
         x.textContent = ""
         x.className = "question-text-button"
     })
-
     displayArr = arr.sort( () => { return 0.5 - Math.random() } )
     displayArr = displayArr.slice(0, 10)
     gameLimit = displayArr.length
@@ -356,19 +379,13 @@ function renderGame(arr){
         displayTextArr.push( getText )
     }
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
-
     answersArr.push( displayTextArr[0] )
-
     while ( answersArr.length < 2 ) {
         let randomNumber = Math.floor( ( Math.random() * ( displayTextArr.length - 1 ) ) + 1 )
-        console.log(randomNumber)
         let otherAnswer = displayTextArr[randomNumber]
         answersArr.push( otherAnswer )
     }
-    
-
     answersArr = answersArr.sort( () => {return 0.5 - Math.random() } )
-
     for ( let i = 0; i < answersArr.length; i++ ) {
         let currentTextBox = questionTextBox.children[i]
         currentTextBox.className = "question-text-button"
@@ -379,41 +396,30 @@ function renderGame(arr){
         }
         currentTextBox.textContent = answersArr[i]
     }
-    console.log(answersArr)
     cardsContainer.classList.remove("reduced")
     topicBtnDisplay.classList.add("hide-me")
-    console.log(displayArr)
     round++
 }
 
 function renderNext() {
     answersArr = []
+    answered = false
     let allTextBoxes = document.querySelectorAll(".question-text-button")
     allTextBoxes.forEach( (x) => {
         x.textContent = ""
         x.className = "question-text-button"
     })
-    console.log(displayArr)
     displayArr.shift()
-    console.log(displayArr)
-    console.log(displayTextArr)
     displayTextArr.push(displayTextArr[0])
     displayTextArr.shift()
-    console.log(displayTextArr)
-
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
-
     answersArr.push( displayTextArr[0] )
-
     while ( answersArr.length < 2 ) {
         let randomNumber = Math.floor( ( Math.random() * ( displayTextArr.length - 1 ) ) + 1 )
-        console.log(randomNumber)
         let otherAnswer = displayTextArr[randomNumber]
         answersArr.push( otherAnswer )
     }
-    
     answersArr = answersArr.sort( () => {return 0.5 - Math.random() } )
-
     for ( let i = 0; i < answersArr.length; i++ ) {
         let currentTextBox = questionTextBox.children[i]
         currentTextBox.className = "question-text-button"
@@ -424,24 +430,28 @@ function renderNext() {
         }
         currentTextBox.textContent = answersArr[i]
     }
-    console.log(answersArr)
     cardsContainer.classList.remove("reduced")
     topicBtnDisplay.classList.add("hide-me")
-    console.log(displayArr)
     round++
 }
 
+function renderLast() {
+    resultBox.classList.remove("reduced")
+    let scoreDisplay = document.getElementById("score")
+    scoreDisplay.textContent = `You scored ${score}/${gameLimit}`
+}
 
-clearBtn.addEventListener("click",function(){
+function clearAll() {
     cardsContainer.classList.add("reduced")
+    resultBox.classList.add("reduced")
     let currenterDiv = document.getElementById("select-container")
     currenterDiv.innerHTML = ""
     activeArr = []
     displayArr = []
     selectArr = []
+    score = 0
     topicBtnDisplay.classList.remove("hide-me")
     document.querySelectorAll(`.toggleOn`).forEach( (x) => {
     x.className = "toggleOff"
     })
-})
-
+}
