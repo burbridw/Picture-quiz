@@ -7,6 +7,7 @@ let goBackBtn = ""
 let imgList = ""
 let selectionOpen = false
 let answered = false
+let difficulty = 2
 let round = 0
 let gameLimit = 0
 let score = 0
@@ -334,7 +335,14 @@ textButtons.forEach( (x) => {
         let currentImgSrc = questionImage.getAttribute("src")
         let imageIndex = allImagesArr.indexOf(currentImgSrc)
         let imageText = allTextArr[imageIndex]
-        if ( x.textContent === imageText) {
+        let answerAndNumber = x.textContent
+        let splitArr = answerAndNumber.split(" ")
+        console.log(splitArr)
+        splitArr.shift()
+        console.log(splitArr)
+        splitArr = splitArr.join(" ")
+        console.log(splitArr)
+        if ( splitArr.includes(imageText) ) {
             if (!answered) {
             score++
             }
@@ -349,11 +357,13 @@ textButtons.forEach( (x) => {
 
 const nextButton = document.querySelector(".next-button")
 nextButton.addEventListener("click", function() {
+    if ( answered ) {
     if ( round < gameLimit ) {
     renderNext()
     } else {
         renderLast()
     }
+}
 })
 
 function renderGame(arr){
@@ -380,7 +390,7 @@ function renderGame(arr){
     }
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
     answersArr.push( displayTextArr[0] )
-    while ( answersArr.length < 2 ) {
+    while ( answersArr.length < difficulty ) {
         let randomNumber = Math.floor( ( Math.random() * ( displayTextArr.length - 1 ) ) + 1 )
         let otherAnswer = displayTextArr[randomNumber]
         answersArr.push( otherAnswer )
@@ -389,12 +399,16 @@ function renderGame(arr){
     for ( let i = 0; i < answersArr.length; i++ ) {
         let currentTextBox = questionTextBox.children[i]
         currentTextBox.className = "question-text-button"
-        if ( answersArr[i].length > 18 ) {
+        if ( answersArr[i].length > 16 ) {
             currentTextBox.classList.add("verylong")
-        } else if ( answersArr[i].length >= 8 ) {
+        } else if ( answersArr[i].length >= 6 ) {
             currentTextBox.classList.add("long")
         }
-        currentTextBox.textContent = answersArr[i]
+        currentTextBox.textContent = (i+1) + "." + " " + answersArr[i]
+        console.log(currentTextBox.textContent)
+        let testLog = currentTextBox.textContent
+        console.log(testLog.split(" "))
+        let target = testLog.split(" ")
     }
     cardsContainer.classList.remove("reduced")
     topicBtnDisplay.classList.add("hide-me")
@@ -414,7 +428,7 @@ function renderNext() {
     displayTextArr.shift()
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
     answersArr.push( displayTextArr[0] )
-    while ( answersArr.length < 2 ) {
+    while ( answersArr.length < difficulty ) {
         let randomNumber = Math.floor( ( Math.random() * ( displayTextArr.length - 1 ) ) + 1 )
         let otherAnswer = displayTextArr[randomNumber]
         answersArr.push( otherAnswer )
@@ -423,12 +437,12 @@ function renderNext() {
     for ( let i = 0; i < answersArr.length; i++ ) {
         let currentTextBox = questionTextBox.children[i]
         currentTextBox.className = "question-text-button"
-        if ( answersArr[i].length > 18 ) {
+        if ( answersArr[i].length > 16 ) {
             currentTextBox.classList.add("verylong")
-        } else if ( answersArr[i].length >= 8 ) {
+        } else if ( answersArr[i].length >= 6 ) {
             currentTextBox.classList.add("long")
         }
-        currentTextBox.textContent = answersArr[i]
+        currentTextBox.textContent = (i+1) + "." + " " + answersArr[i]
     }
     cardsContainer.classList.remove("reduced")
     topicBtnDisplay.classList.add("hide-me")
