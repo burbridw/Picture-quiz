@@ -3,9 +3,11 @@ let selectArr = []
 let displayArr = []
 let displayTextArr = []
 let answersArr = []
+let otherAnswersArr = []
 let goBackBtn = ""
 let imgList = ""
 let selectionOpen = false
+let gameActive = false
 let answered = false
 let difficulty = 2
 let round = 0
@@ -18,6 +20,42 @@ const cardsContainer = document.querySelector(".cards-container")
 const questionImageContainer = document.querySelector(".question-image-container")
 const questionTextBox = document.querySelector(".question-text")
 const resultBox = document.querySelector(".result-container")
+
+
+function buildTextBox() {
+    questionTextBox.innerHTML = ""
+    for ( let i = 0; i < difficulty; i++ ) {
+        questionTextBox.innerHTML += `<button class="question-text-button"></button>`
+    } 
+}
+buildTextBox()
+
+
+const difficultySelect = document.getElementById("difficulty-btn")
+
+difficultySelect.addEventListener("click",function(){
+    if ( !gameActive ) {
+    if ( difficulty === 2 ) {
+        difficulty = 3
+        difficultySelect.textContent = "Medium (3)"
+        buildTextBox()
+    } else if ( difficulty === 3 ) {
+        difficulty = 4
+        difficultySelect.textContent = "Hard(4)"
+        buildTextBox()
+    } else if ( difficulty === 4 ) {
+        difficulty = 5
+        difficultySelect.textContent = "Very Hard(5)"
+        buildTextBox()
+    } else if ( difficulty === 5 ) {
+        difficulty = 2
+        difficultySelect.textContent = "Easy(2)"
+        buildTextBox()
+    }
+}
+})
+
+
 
 
 const feelingsArr = ["./images/feelings/img1.png","./images/feelings/img2.png", "./images/feelings/img3.png", "./images/feelings/img4.png", "./images/feelings/img5.png", "./images/feelings/img6.png", "./images/feelings/img7.png", "./images/feelings/img8.png", "./images/feelings/img9.png","./images/feelings/img10.png"]
@@ -328,33 +366,6 @@ menuButton.addEventListener("click",function() {
     resultBox.classList.add("reduced")
 })
 
-let textButtons = document.querySelectorAll(".question-text-button")
-textButtons.forEach( (x) => {
-    x.addEventListener("click",function() {
-        let questionImage = document.querySelector(".question-image")
-        let currentImgSrc = questionImage.getAttribute("src")
-        let imageIndex = allImagesArr.indexOf(currentImgSrc)
-        let imageText = allTextArr[imageIndex]
-        let answerAndNumber = x.textContent
-        let splitArr = answerAndNumber.split(" ")
-        console.log(splitArr)
-        splitArr.shift()
-        console.log(splitArr)
-        splitArr = splitArr.join(" ")
-        console.log(splitArr)
-        if ( splitArr.includes(imageText) ) {
-            if (!answered) {
-            score++
-            }
-            answered = true
-            x.classList.add("correct-answer")
-        } else {
-            answered = true
-            x.classList.add("wrong-answer")
-        }
-    })
-})
-
 const nextButton = document.querySelector(".next-button")
 nextButton.addEventListener("click", function() {
     if ( answered ) {
@@ -367,6 +378,31 @@ nextButton.addEventListener("click", function() {
 })
 
 function renderGame(arr){
+    let textButtons = document.querySelectorAll(".question-text-button")
+    textButtons.forEach( (x) => {
+    x.addEventListener("click",function() {
+        let questionImage = document.querySelector(".question-image")
+        let currentImgSrc = questionImage.getAttribute("src")
+        let imageIndex = allImagesArr.indexOf(currentImgSrc)
+        let imageText = allTextArr[imageIndex]
+        let answerAndNumber = x.textContent
+        let splitArr = answerAndNumber.split(" ")
+        splitArr.shift()
+        splitArr = splitArr.join(" ")
+        if ( splitArr.includes(imageText) ) {
+            if (!answered) {
+            score++
+            }
+            answered = true
+            x.classList.add("correct-answer")
+        } else {
+            answered = true
+            x.classList.add("wrong-answer")
+        }
+    })
+    })
+    gameActive = true
+    difficultySelect.classList.add("unavailable")
     round = 0
     score = 0
     answersArr = []
@@ -390,25 +426,31 @@ function renderGame(arr){
     }
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
     answersArr.push( displayTextArr[0] )
-    while ( answersArr.length < difficulty ) {
-        let randomNumber = Math.floor( ( Math.random() * ( displayTextArr.length - 1 ) ) + 1 )
-        let otherAnswer = displayTextArr[randomNumber]
-        answersArr.push( otherAnswer )
+    if ( difficulty < 4 ) {
+    otherAnswersArr = displayTextArr.slice(1, 10)
+    otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
+    otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
+    answersArr = answersArr.concat(otherAnswersArr)
+    } else {
+        console.log(otherAnswersArr)
+        otherAnswersArr = allTextArr.filter( (x) => !answersArr.includes(x) )
+        console.log(otherAnswersArr)
+        otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
+        otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
+        console.log(otherAnswersArr)
+        answersArr = answersArr.concat(otherAnswersArr)        
     }
     answersArr = answersArr.sort( () => {return 0.5 - Math.random() } )
+
     for ( let i = 0; i < answersArr.length; i++ ) {
         let currentTextBox = questionTextBox.children[i]
         currentTextBox.className = "question-text-button"
-        if ( answersArr[i].length > 16 ) {
+        if ( answersArr[i].length > 15 ) {
             currentTextBox.classList.add("verylong")
         } else if ( answersArr[i].length >= 6 ) {
             currentTextBox.classList.add("long")
         }
         currentTextBox.textContent = (i+1) + "." + " " + answersArr[i]
-        console.log(currentTextBox.textContent)
-        let testLog = currentTextBox.textContent
-        console.log(testLog.split(" "))
-        let target = testLog.split(" ")
     }
     cardsContainer.classList.remove("reduced")
     topicBtnDisplay.classList.add("hide-me")
@@ -428,16 +470,26 @@ function renderNext() {
     displayTextArr.shift()
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
     answersArr.push( displayTextArr[0] )
-    while ( answersArr.length < difficulty ) {
-        let randomNumber = Math.floor( ( Math.random() * ( displayTextArr.length - 1 ) ) + 1 )
-        let otherAnswer = displayTextArr[randomNumber]
-        answersArr.push( otherAnswer )
+    if ( difficulty < 4 ) {
+    otherAnswersArr = displayTextArr.slice(1, 10)
+    otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
+    otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
+    answersArr = answersArr.concat(otherAnswersArr)
+    } else {
+        console.log(otherAnswersArr)
+        otherAnswersArr = allTextArr.filter( (x) => !answersArr.includes(x) )
+        console.log(otherAnswersArr)
+        otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
+        otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
+        console.log(otherAnswersArr)
+        answersArr = answersArr.concat(otherAnswersArr)        
     }
     answersArr = answersArr.sort( () => {return 0.5 - Math.random() } )
+
     for ( let i = 0; i < answersArr.length; i++ ) {
         let currentTextBox = questionTextBox.children[i]
         currentTextBox.className = "question-text-button"
-        if ( answersArr[i].length > 16 ) {
+        if ( answersArr[i].length > 15 ) {
             currentTextBox.classList.add("verylong")
         } else if ( answersArr[i].length >= 6 ) {
             currentTextBox.classList.add("long")
@@ -453,6 +505,8 @@ function renderLast() {
     resultBox.classList.remove("reduced")
     let scoreDisplay = document.getElementById("score")
     scoreDisplay.textContent = `You scored ${score}/${gameLimit}`
+    gameActive = false
+    difficultySelect.classList.remove("unavailable")
 }
 
 function clearAll() {
@@ -464,6 +518,8 @@ function clearAll() {
     displayArr = []
     selectArr = []
     score = 0
+    gameActive = false
+    difficultySelect.classList.remove("unavailable")
     topicBtnDisplay.classList.remove("hide-me")
     document.querySelectorAll(`.toggleOn`).forEach( (x) => {
     x.className = "toggleOff"
