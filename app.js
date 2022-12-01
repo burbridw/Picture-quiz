@@ -13,6 +13,7 @@ let difficulty = 2
 let round = 0
 let gameLimit = 0
 let score = 0
+let lang = "en"
 
 const gameBtnDisplay = document.getElementById("game-btn-container")
 const topicBtnDisplay = document.getElementById("topic-btn-container")
@@ -35,19 +36,35 @@ difficultySelect.addEventListener("click",function(){
     if ( !gameActive ) {
     if ( difficulty === 2 ) {
         difficulty = 3
-        difficultySelect.textContent = "Medium (3)"
+        if ( lang === "en" ) {
+            difficultySelect.textContent = "Medium (3)"
+        } else {
+            difficultySelect.textContent = "中 (3)"
+        }
         buildTextBox()
     } else if ( difficulty === 3 ) {
         difficulty = 4
-        difficultySelect.textContent = "Hard(4)"
+        if ( lang === "en") {
+            difficultySelect.textContent = "Hard(4)"
+        } else {
+            difficultySelect.textContent = "高 (4)"
+        }
         buildTextBox()
     } else if ( difficulty === 4 ) {
         difficulty = 5
-        difficultySelect.textContent = "Very Hard(5)"
+        if ( lang === "en" ) {
+            difficultySelect.textContent = "Very Hard(5)"
+        } else {
+            difficultySelect.textContent = "超 (5)"
+        }
         buildTextBox()
     } else if ( difficulty === 5 ) {
         difficulty = 2
-        difficultySelect.textContent = "Easy(2)"
+        if ( lang === "en" ) {
+            difficultySelect.textContent = "Easy(2)"
+        } else {
+            difficultySelect.textContent = "低 (2)"
+        }
         buildTextBox()
     }
 }
@@ -155,7 +172,139 @@ const allObj = {
 allImage = Object.keys(allObj)
 allText = Object.values(allObj)
 
-const quickStart = document.getElementById("quick-start")
+function language() {
+    if ( lang === "en") {
+        document.getElementById("feelings").textContent = "気分"
+        document.getElementById("weather").textContent = "天気"
+        document.getElementById("colors").textContent = "色"
+        document.getElementById("sports").textContent = "スポーツ"
+        document.getElementById("shapes").textContent = "形"
+        document.getElementById("foods").textContent = "食べ物"
+        document.getElementById("drinks").textContent = "飲み物"
+        document.getElementById("desserts").textContent = "デザート"
+        document.getElementById("fruitandveg").textContent = "果物と野菜"
+        document.getElementById("ingredients").textContent = "食材"
+        document.getElementById("meals").textContent = "食事"
+        document.getElementById("tastes").textContent = "味など"
+        document.getElementById("animals").textContent = "動物"
+        document.getElementById("seaanimals").textContent = "海の生き物"
+        document.getElementById("bugs").textContent = "虫"
+        document.getElementById("nature").textContent = "自然"
+        document.getElementById("months").textContent = "月"
+        document.getElementById("seasons").textContent = "季節"
+        document.getElementById("timesofday").textContent = "一日の時間"
+        document.getElementById("days").textContent = "曜日"
+        document.getElementById("countries").textContent = "国"
+        document.getElementById("family").textContent = "家族"
+        document.getElementById("people").textContent = "人"
+        document.getElementById("personalities").textContent = "性格など"
+        document.getElementById("actions1").textContent = "動作など 1"
+        document.getElementById("pastactions").textContent = "したこと"
+        document.getElementById("actions2").textContent = "動作など 2"
+        document.getElementById("dailyactivities").textContent = "一日の生活"
+        document.getElementById("frequency").textContent = "頻度"
+        document.getElementById("body").textContent = "からだ"
+        document.getElementById("clothes").textContent = "衣類"
+        document.getElementById("buildings").textContent = "建物など"
+        document.getElementById("directions").textContent = "道案内"
+        document.getElementById("locations").textContent = "位置"
+        document.getElementById("vehicles").textContent = "乗り物"
+        document.getElementById("school").textContent = "学校"
+        document.getElementById("subjects").textContent = "教科"
+        document.getElementById("instruments").textContent = "楽器"
+        document.getElementById("stationary").textContent = "文房具"
+        document.getElementById("commonitems").textContent = "日常生活"
+        document.getElementById("activities").textContent = "遊びなど"
+        document.getElementById("schoolevents").textContent = "学校行事"
+        document.getElementById("yearlyevents") .textContent = "年中行事"
+        document.getElementById("conditions").textContent = "状態"
+        document.getElementById("descriptions").textContent = "様子"
+        document.getElementById("jobs").textContent = "職業"
+        document.getElementById("clubactivities").textContent = "部活動"
+        clearBtn.textContent = "削除"
+        if ( !gameActive ) {
+            renderBtn.textContent = "スタート"
+        } else {
+            renderBtn.textContent = "リセって"
+        }
+        if ( difficulty === 2 ) {
+            difficultySelect.textContent = "低 (2)"
+        } else if ( difficulty === 3 ) {
+            difficultySelect.textContent = "中 (3)"
+        } else if ( difficulty === 4 ) {
+            difficultySelect.textContent = "高 (4)"
+        } else if ( difficulty === 5 ) {
+            difficultySelect.textContent = "超 (5)"
+        }
+        lang = "jpn"
+    } else {
+        document.getElementById("feelings").textContent = "Feelings"
+        document.getElementById("weather").textContent = "Weather"
+        document.getElementById("colors").textContent = "Colors"
+        document.getElementById("sports").textContent = "Sports"
+        document.getElementById("shapes").textContent = "Shapes"
+        document.getElementById("foods").textContent = "Foods"
+        document.getElementById("drinks").textContent = "Drinks"
+        document.getElementById("desserts").textContent = "Desserts"
+        document.getElementById("fruitandveg").textContent = "Fruit and Veg"
+        document.getElementById("ingredients").textContent = "Ingredients"
+        document.getElementById("meals").textContent = "Meals"
+        document.getElementById("tastes").textContent = "Tastes"
+        document.getElementById("animals").textContent = "Animals"
+        document.getElementById("seaanimals").textContent = "Sea Animals"
+        document.getElementById("bugs").textContent = "Bugs"
+        document.getElementById("nature").textContent = "Nature"
+        document.getElementById("months").textContent = "Months"
+        document.getElementById("seasons").textContent = "Seasons"
+        document.getElementById("timesofday").textContent = "Times"
+        document.getElementById("days").textContent = "Days"
+        document.getElementById("countries").textContent = "Countries"
+        document.getElementById("family").textContent = "Family"
+        document.getElementById("people").textContent = "People"
+        document.getElementById("personalities").textContent = "Personalities"
+        document.getElementById("actions1").textContent = "Actions 1"
+        document.getElementById("pastactions").textContent = "Past Actions"
+        document.getElementById("actions2").textContent = "Actions 2"
+        document.getElementById("dailyactivities").textContent = "Daily Activities"
+        document.getElementById("frequency").textContent = "Frequency"
+        document.getElementById("body").textContent = "Body"
+        document.getElementById("clothes").textContent = "Clothes"
+        document.getElementById("buildings").textContent = "Buildings"
+        document.getElementById("directions").textContent = "Directions"
+        document.getElementById("locations").textContent = "Locations"
+        document.getElementById("vehicles").textContent = "Vehicles"
+        document.getElementById("school").textContent = "School"
+        document.getElementById("subjects").textContent = "Subjects"
+        document.getElementById("instruments").textContent = "Instruments"
+        document.getElementById("stationary").textContent = "Stationary"
+        document.getElementById("commonitems").textContent = "Common Items"
+        document.getElementById("activities").textContent = "Activities"
+        document.getElementById("schoolevents").textContent = "School Events"
+        document.getElementById("yearlyevents") .textContent = "Yearly Events"
+        document.getElementById("conditions").textContent = "Conditions"
+        document.getElementById("descriptions").textContent = "Descriptions"
+        document.getElementById("jobs").textContent = "Jobs"
+        document.getElementById("clubactivities").textContent = "Club Activities"
+        clearBtn.textContent = "Clear All"
+        if ( !gameActive ) {
+            renderBtn.textContent = "Begin the Game"
+        } else {
+            renderBtn.textContent = "Reset"
+        }
+        if ( difficulty === 2 ) {
+            difficultySelect.textContent = "Easy (2)"
+        } else if ( difficulty === 3 ) {
+            difficultySelect.textContent = "Medium (3)"
+        } else if ( difficulty === 4 ) {
+            difficultySelect.textContent = "Hard (4)"
+        } else if ( difficulty === 5 ) {
+            difficultySelect.textContent = "Very Hard (5)"
+        }
+        lang = "en"
+    }
+}
+
+const enJpn = document.getElementById("en-jpn")
 const clearBtn = document.getElementById("clear")
 const renderBtn = document.getElementById("render-btn")
 const playAgainButton = document.getElementById("play-again-button")
@@ -164,7 +313,8 @@ const menuButton = document.getElementById("menu-button")
 const allSelectButtons = document.querySelectorAll(".imageSelect")
 allSelectButtons.forEach( (x) => {
     x.addEventListener("click",function() {
-        let tag = x.textContent.toLowerCase().split(" ").join("")
+        /*let tag = x.textContent.toLowerCase().split(" ").join("")*/
+        let tag = x.getAttribute("id")
         beginSelection( selectObj[tag] )
     })
 })
@@ -250,11 +400,13 @@ function passSelect() {
     topicBtnDisplay.className = ""
     
 }
-
+/*
 quickStart.addEventListener("click",function(){
     activeArr = allImage
     renderGame(activeArr)
 })
+*/
+enJpn.addEventListener("click",language)
 
 renderBtn.addEventListener("click", function(){
     if (activeArr.length >= 1) {
@@ -311,6 +463,7 @@ function renderGame(arr){
     })
     })
     gameActive = true
+    renderBtn.textContent = "Reset"
     difficultySelect.classList.add("unavailable")
     round = 0
     score = 0
@@ -421,6 +574,7 @@ function clearAll() {
     selectArr = []
     score = 0
     gameActive = false
+    renderBtn.textContent = "Begin the Game"
     difficultySelect.classList.remove("unavailable")
     topicBtnDisplay.classList.remove("hide-me")
     document.querySelectorAll(".toggleOn").forEach( (x) => {
