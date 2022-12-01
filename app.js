@@ -172,60 +172,45 @@ const allObj = {
 allImage = Object.keys(allObj)
 allText = Object.values(allObj)
 
+const langObj = {
+    en: {
+        "feelings" : "気分", "weather" : "天気", "colors" : "色", "shapes" : "形", "sports" : "スポーツ", "foods" : "食べ物", "desserts" : "デザート", "drinks" : "飲み物", 
+        "fruitandveg" : "果物と野菜", "ingredients" : "食材", "meals" : "食事",  "tastes" : "味など", "animals" : "動物", "seaanimals" : "海の生き物", "bugs" : "虫", "nature" : "自然", 
+        "months" : "月", "seasons" : "季節", "timesofday" : "一日の時間", "days" : "曜日", "countries" : "国", "family" : "家族", "people" : "人", "personalities" : "性格など", 
+        "actions1" : "動作など 1", "pastactions" : "したこと", "actions2" : "動作など 2", "dailyactivities" : "一日の生活", "frequency" : "頻度", "body" : "からだ", "clothes" : "衣類", 
+        "buildings" : "建物など", "directions" : "道案内", "locations" : "位置", "vehicles" : "乗り物", "school" : "学校", "subjects" : "教科", "instruments" : "楽器", 
+        "stationary" : "文房具", "commonitems" : "日常生活", "activities" : "遊びなど", "schoolevents" : "学校行事", "yearlyevents" : "年中行事", "conditions" : "状態", 
+        "descriptions" : "様子", "jobs" : "職業", "clubactivities" : "部活動", "clear": "削除", "next": "次", "play-again-button": "やり直し", "menu-button": "戻る"
+    },
+    jpn: {
+        "feelings" : "Feelings", "weather" : "Weather", "colors" : "Colors", "shapes" : "Shapes", "sports" : "Sports", "foods" : "Foods", "desserts" : "Desserts", "drinks" : "Drinks", 
+        "fruitandveg" : "Fruit and Veg", "ingredients" : "Ingredients", "meals" : "Meals",  "tastes" : "Tastes", "animals" : "Animals", "seaanimals" : "Sea Animals", "bugs" : "Bugs", 
+        "nature" : "Nature", "months" : "Months", "seasons" : "Seasons", "timesofday" : "Times", "days" : "Days", "countries" : "Countries", "family" : "Family", "people" : "People", 
+        "personalities" : "Personalities", "actions1" : "Actions 1", "pastactions" : "Past Actions", "actions2" : "Actions 2", "dailyactivities" : "Daily Activities", 
+        "frequency" : "Frequency", "body" : "Body", "clothes" : "Clothes", "buildings" : "Buildings", "directions" : "Directions", "locations" : "Locations", "vehicles" : "Vehicles", 
+        "school" : "School", "subjects" : "Subjects", "instruments" : "Instruments", "stationary" : "Stationary", "commonitems" : "Common Items", "activities" : "Activities", 
+        "schoolevents" : "School Events", "yearlyevents" : "Yearly Events", "conditions" : "Conditions", "descriptions" : "Descriptions", "jobs" : "Jobs", 
+        "clubactivities" : "Club Activities", "clear": "Clear All", "next": "Next", "play-again-button": "Play Again", "menu-button": "Main Menu"
+    }
+}
+let allTopicButtons = document.querySelectorAll(".language")
+allTopicButtons.forEach( (x)=>{
+    
+})
+
+
+console.log(langObj.en[document.getElementById("feelings").textContent.toLowerCase()])
 function language() {
+    let allTopicButtons = document.querySelectorAll(".language")
+    allTopicButtons.forEach( (x) => {
+        let current = x.getAttribute("id")
+        document.getElementById(current).textContent = langObj[lang][current]
+    })
     if ( lang === "en") {
-        document.getElementById("feelings").textContent = "気分"
-        document.getElementById("weather").textContent = "天気"
-        document.getElementById("colors").textContent = "色"
-        document.getElementById("sports").textContent = "スポーツ"
-        document.getElementById("shapes").textContent = "形"
-        document.getElementById("foods").textContent = "食べ物"
-        document.getElementById("drinks").textContent = "飲み物"
-        document.getElementById("desserts").textContent = "デザート"
-        document.getElementById("fruitandveg").textContent = "果物と野菜"
-        document.getElementById("ingredients").textContent = "食材"
-        document.getElementById("meals").textContent = "食事"
-        document.getElementById("tastes").textContent = "味など"
-        document.getElementById("animals").textContent = "動物"
-        document.getElementById("seaanimals").textContent = "海の生き物"
-        document.getElementById("bugs").textContent = "虫"
-        document.getElementById("nature").textContent = "自然"
-        document.getElementById("months").textContent = "月"
-        document.getElementById("seasons").textContent = "季節"
-        document.getElementById("timesofday").textContent = "一日の時間"
-        document.getElementById("days").textContent = "曜日"
-        document.getElementById("countries").textContent = "国"
-        document.getElementById("family").textContent = "家族"
-        document.getElementById("people").textContent = "人"
-        document.getElementById("personalities").textContent = "性格など"
-        document.getElementById("actions1").textContent = "動作など 1"
-        document.getElementById("pastactions").textContent = "したこと"
-        document.getElementById("actions2").textContent = "動作など 2"
-        document.getElementById("dailyactivities").textContent = "一日の生活"
-        document.getElementById("frequency").textContent = "頻度"
-        document.getElementById("body").textContent = "からだ"
-        document.getElementById("clothes").textContent = "衣類"
-        document.getElementById("buildings").textContent = "建物など"
-        document.getElementById("directions").textContent = "道案内"
-        document.getElementById("locations").textContent = "位置"
-        document.getElementById("vehicles").textContent = "乗り物"
-        document.getElementById("school").textContent = "学校"
-        document.getElementById("subjects").textContent = "教科"
-        document.getElementById("instruments").textContent = "楽器"
-        document.getElementById("stationary").textContent = "文房具"
-        document.getElementById("commonitems").textContent = "日常生活"
-        document.getElementById("activities").textContent = "遊びなど"
-        document.getElementById("schoolevents").textContent = "学校行事"
-        document.getElementById("yearlyevents") .textContent = "年中行事"
-        document.getElementById("conditions").textContent = "状態"
-        document.getElementById("descriptions").textContent = "様子"
-        document.getElementById("jobs").textContent = "職業"
-        document.getElementById("clubactivities").textContent = "部活動"
-        clearBtn.textContent = "削除"
         if ( !gameActive ) {
             renderBtn.textContent = "スタート"
         } else {
-            renderBtn.textContent = "リセって"
+            renderBtn.textContent = "リセット"
         }
         if ( difficulty === 2 ) {
             difficultySelect.textContent = "低 (2)"
@@ -238,54 +223,6 @@ function language() {
         }
         lang = "jpn"
     } else {
-        document.getElementById("feelings").textContent = "Feelings"
-        document.getElementById("weather").textContent = "Weather"
-        document.getElementById("colors").textContent = "Colors"
-        document.getElementById("sports").textContent = "Sports"
-        document.getElementById("shapes").textContent = "Shapes"
-        document.getElementById("foods").textContent = "Foods"
-        document.getElementById("drinks").textContent = "Drinks"
-        document.getElementById("desserts").textContent = "Desserts"
-        document.getElementById("fruitandveg").textContent = "Fruit and Veg"
-        document.getElementById("ingredients").textContent = "Ingredients"
-        document.getElementById("meals").textContent = "Meals"
-        document.getElementById("tastes").textContent = "Tastes"
-        document.getElementById("animals").textContent = "Animals"
-        document.getElementById("seaanimals").textContent = "Sea Animals"
-        document.getElementById("bugs").textContent = "Bugs"
-        document.getElementById("nature").textContent = "Nature"
-        document.getElementById("months").textContent = "Months"
-        document.getElementById("seasons").textContent = "Seasons"
-        document.getElementById("timesofday").textContent = "Times"
-        document.getElementById("days").textContent = "Days"
-        document.getElementById("countries").textContent = "Countries"
-        document.getElementById("family").textContent = "Family"
-        document.getElementById("people").textContent = "People"
-        document.getElementById("personalities").textContent = "Personalities"
-        document.getElementById("actions1").textContent = "Actions 1"
-        document.getElementById("pastactions").textContent = "Past Actions"
-        document.getElementById("actions2").textContent = "Actions 2"
-        document.getElementById("dailyactivities").textContent = "Daily Activities"
-        document.getElementById("frequency").textContent = "Frequency"
-        document.getElementById("body").textContent = "Body"
-        document.getElementById("clothes").textContent = "Clothes"
-        document.getElementById("buildings").textContent = "Buildings"
-        document.getElementById("directions").textContent = "Directions"
-        document.getElementById("locations").textContent = "Locations"
-        document.getElementById("vehicles").textContent = "Vehicles"
-        document.getElementById("school").textContent = "School"
-        document.getElementById("subjects").textContent = "Subjects"
-        document.getElementById("instruments").textContent = "Instruments"
-        document.getElementById("stationary").textContent = "Stationary"
-        document.getElementById("commonitems").textContent = "Common Items"
-        document.getElementById("activities").textContent = "Activities"
-        document.getElementById("schoolevents").textContent = "School Events"
-        document.getElementById("yearlyevents") .textContent = "Yearly Events"
-        document.getElementById("conditions").textContent = "Conditions"
-        document.getElementById("descriptions").textContent = "Descriptions"
-        document.getElementById("jobs").textContent = "Jobs"
-        document.getElementById("clubactivities").textContent = "Club Activities"
-        clearBtn.textContent = "Clear All"
         if ( !gameActive ) {
             renderBtn.textContent = "Begin the Game"
         } else {
@@ -336,11 +273,21 @@ function renderSelect(targetDiv, arr){
     gameBtnDisplay.className = "hide-me"
     topicBtnDisplay.className = "hide-me"
     let currentDiv = document.getElementById(targetDiv)
-    currentDiv.innerHTML = `<div class="inner-btn-menu">
-                                <button id="selectall" onClick="selectAll()">All</button>
-                                <button id="clearselection" onClick="selectClear()">Clear</button>
-                                <button id="closewindow" onClick="passSelect()">Confirm and Go Back</button>
-                            </div>`
+    if ( lang === "en" ) {
+        currentDiv.innerHTML = `<div class="inner-btn-menu">
+                                    <button id="selectall" onClick="selectAll()">All</button>
+                                    <button id="clearselection" onClick="selectClear()">Clear</button>
+                                    <button id="closewindow" onClick="passSelect()">Confirm and Go Back</button>
+                                </div>
+                                `
+    } else {
+        currentDiv.innerHTML = `<div class="inner-btn-menu">
+                                    <button id="selectall" onClick="selectAll()">全て</button>
+                                    <button id="clearselection" onClick="selectClear()">削除</button>
+                                    <button id="closewindow" onClick="passSelect()">承認して戻る</button>
+                                </div>
+                                `
+    }
     for ( let i = 0; i < arr.length; i++) {
     currentDiv.innerHTML += `<div class="img-box"><img class="select-img unselected" src="${arr[i]}"></div>`
     imgList = document.querySelectorAll(`.select-img`)
@@ -400,12 +347,7 @@ function passSelect() {
     topicBtnDisplay.className = ""
     
 }
-/*
-quickStart.addEventListener("click",function(){
-    activeArr = allImage
-    renderGame(activeArr)
-})
-*/
+
 enJpn.addEventListener("click",language)
 
 renderBtn.addEventListener("click", function(){
@@ -431,12 +373,12 @@ menuButton.addEventListener("click",function() {
 const nextButton = document.querySelector(".next-button")
 nextButton.addEventListener("click", function() {
     if ( answered ) {
-    if ( round < gameLimit ) {
-    renderNext()
-    } else {
-        renderLast()
+        if ( round < gameLimit ) {
+        renderNext()
+        } else {
+            renderLast()
+        }
     }
-}
 })
 
 function renderGame(arr){
@@ -452,7 +394,7 @@ function renderGame(arr){
         splitArr = splitArr.join(" ")
         if ( splitArr.includes(imageText) ) {
             if (!answered) {
-            score++
+                score++
             }
             answered = true
             x.classList.add("correct-answer")
@@ -463,7 +405,11 @@ function renderGame(arr){
     })
     })
     gameActive = true
-    renderBtn.textContent = "Reset"
+    if ( lang === "en" ) {
+        renderBtn.textContent = "Reset"
+    } else {
+        renderBtn.textContent = "リセット"
+    }
     difficultySelect.classList.add("unavailable")
     round = 0
     score = 0
@@ -488,10 +434,10 @@ function renderGame(arr){
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
     answersArr.push( displayTextArr[0] )
     if ( difficulty < 4 ) {
-    otherAnswersArr = displayTextArr.slice(1, 10)
-    otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
-    otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
-    answersArr = answersArr.concat(otherAnswersArr)
+        otherAnswersArr = displayTextArr.slice(1, 10)
+        otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
+        otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
+        answersArr = answersArr.concat(otherAnswersArr)
     } else {
         otherAnswersArr = allText.filter( (x) => !answersArr.includes(x) )
         otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
@@ -529,10 +475,10 @@ function renderNext() {
     questionImageContainer.innerHTML = `<img class="question-image" src="${displayArr[0]}">`
     answersArr.push( displayTextArr[0] )
     if ( difficulty < 4 ) {
-    otherAnswersArr = displayTextArr.slice(1, 10)
-    otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
-    otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
-    answersArr = answersArr.concat(otherAnswersArr)
+        otherAnswersArr = displayTextArr.slice(1, 10)
+        otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
+        otherAnswersArr = otherAnswersArr.slice(0, difficulty - 1)
+        answersArr = answersArr.concat(otherAnswersArr)
     } else {
         otherAnswersArr = allText.filter( (x) => !answersArr.includes(x) )
         otherAnswersArr = otherAnswersArr.sort(  () => { return 0.5 - Math.random() } )
@@ -574,7 +520,11 @@ function clearAll() {
     selectArr = []
     score = 0
     gameActive = false
-    renderBtn.textContent = "Begin the Game"
+    if ( lang === "en" ) {
+        renderBtn.textContent = "Begin the Game"
+    } else {
+        renderBtn.textContent = "スタート"
+    }
     difficultySelect.classList.remove("unavailable")
     topicBtnDisplay.classList.remove("hide-me")
     document.querySelectorAll(".toggleOn").forEach( (x) => {
