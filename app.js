@@ -173,38 +173,28 @@ allImage = Object.keys(allObj)
 allText = Object.values(allObj)
 
 const langObj = {
-    en: {
-        "feelings" : "気分", "weather" : "天気", "colors" : "色", "shapes" : "形", "sports" : "スポーツ", "foods" : "食べ物", "desserts" : "デザート", "drinks" : "飲み物", 
-        "fruitandveg" : "果物と野菜", "ingredients" : "食材", "meals" : "食事",  "tastes" : "味など", "animals" : "動物", "seaanimals" : "海の生き物", "bugs" : "虫", "nature" : "自然", 
-        "months" : "月", "seasons" : "季節", "timesofday" : "一日の時間", "days" : "曜日", "countries" : "国", "family" : "家族", "people" : "人", "personalities" : "性格など", 
-        "actions1" : "動作など 1", "pastactions" : "したこと", "actions2" : "動作など 2", "dailyactivities" : "一日の生活", "frequency" : "頻度", "body" : "からだ", "clothes" : "衣類", 
-        "buildings" : "建物など", "directions" : "道案内", "locations" : "位置", "vehicles" : "乗り物", "school" : "学校", "subjects" : "教科", "instruments" : "楽器", 
-        "stationary" : "文房具", "commonitems" : "日常生活", "activities" : "遊びなど", "schoolevents" : "学校行事", "yearlyevents" : "年中行事", "conditions" : "状態", 
-        "descriptions" : "様子", "jobs" : "職業", "clubactivities" : "部活動", "clear": "削除", "next": "次", "play-again-button": "やり直し", "menu-button": "戻る"
-    },
-    jpn: {
-        "feelings" : "Feelings", "weather" : "Weather", "colors" : "Colors", "shapes" : "Shapes", "sports" : "Sports", "foods" : "Foods", "desserts" : "Desserts", "drinks" : "Drinks", 
-        "fruitandveg" : "Fruit and Veg", "ingredients" : "Ingredients", "meals" : "Meals",  "tastes" : "Tastes", "animals" : "Animals", "seaanimals" : "Sea Animals", "bugs" : "Bugs", 
-        "nature" : "Nature", "months" : "Months", "seasons" : "Seasons", "timesofday" : "Times", "days" : "Days", "countries" : "Countries", "family" : "Family", "people" : "People", 
-        "personalities" : "Personalities", "actions1" : "Actions 1", "pastactions" : "Past Actions", "actions2" : "Actions 2", "dailyactivities" : "Daily Activities", 
-        "frequency" : "Frequency", "body" : "Body", "clothes" : "Clothes", "buildings" : "Buildings", "directions" : "Directions", "locations" : "Locations", "vehicles" : "Vehicles", 
-        "school" : "School", "subjects" : "Subjects", "instruments" : "Instruments", "stationary" : "Stationary", "commonitems" : "Common Items", "activities" : "Activities", 
-        "schoolevents" : "School Events", "yearlyevents" : "Yearly Events", "conditions" : "Conditions", "descriptions" : "Descriptions", "jobs" : "Jobs", 
-        "clubactivities" : "Club Activities", "clear": "Clear All", "next": "Next", "play-again-button": "Play Again", "menu-button": "Main Menu"
-    }
+    "Feelings" : "気分", "Weather" : "天気", "Colors" : "色", "Shapes" : "形", "Sports" : "スポーツ", "Foods" : "食べ物", "Desserts" : "デザート", "Drinks" : "飲み物", 
+    "Fruit and Veg" : "果物と野菜", "Ingredients" : "食材", "Meals" : "食事",  "Tastes" : "味など", "Animals" : "動物", "Sea Animals" : "海の生き物", "Bugs" : "虫", "Nature" : "自然", 
+    "Months" : "月", "Seasons" : "季節", "Times" : "一日の時間", "Days" : "曜日", "Countries" : "国", "Family" : "家族", "People" : "人", "Personalities" : "性格など", 
+    "Actions 1" : "動作など 1", "Past Actions" : "したこと", "Actions 2" : "動作など 2", "Daily Activities" : "一日の生活", "Frequency" : "頻度", "Body" : "からだ", "Clothes" : "衣類", 
+    "Buildings" : "建物など", "Directions" : "道案内", "Locations" : "位置", "Vehicles" : "乗り物", "School" : "学校", "Subjects" : "教科", "Instruments" : "楽器", 
+    "Stationary" : "文房具", "Common Items" : "日常生活", "Activities" : "遊びなど", "School Events" : "学校行事", "Yearly Events" : "年中行事", "Conditions" : "状態", 
+    "Descriptions" : "様子", "Jobs" : "職業", "Club Activities" : "部活動", "Clear All": "削除", "Next": "次", "Play Again": "やり直し", "Main Menu": "戻る"
 }
-let allTopicButtons = document.querySelectorAll(".language")
-allTopicButtons.forEach( (x)=>{
-    
-})
 
+function getLangKey(obj, value) {
+    return Object.keys(obj).find(key => obj[key] === value)
+}
 
-console.log(langObj.en[document.getElementById("feelings").textContent.toLowerCase()])
 function language() {
     let allTopicButtons = document.querySelectorAll(".language")
-    allTopicButtons.forEach( (x) => {
-        let current = x.getAttribute("id")
-        document.getElementById(current).textContent = langObj[lang][current]
+    allTopicButtons.forEach( (x)=>{
+        let enText = x.textContent
+        if ( lang === "en" ) {
+            x.textContent = langObj[enText]
+        } else {
+            x.textContent = getLangKey(langObj,enText)
+        }
     })
     if ( lang === "en") {
         if ( !gameActive ) {

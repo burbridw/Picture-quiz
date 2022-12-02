@@ -190,3 +190,25 @@ conditionsBtn.addEventListener("click",() => beginSelection(selectObj["condition
 descriptionsBtn.addEventListener("click",() => beginSelection(selectObj["descriptions"]))
 jobsBtn.addEventListener("click",() => beginSelection(selectObj["jobs"]))
 clubactivitiesBtn.addEventListener("click",() => beginSelection(selectObj["clubactivities"]))
+
+const langObj = {
+    en: {
+        "feelings" : "気分", "weather" : "天気", "colors" : "色", "shapes" : "形", "sports" : "スポーツ", "foods" : "食べ物", "desserts" : "デザート", "drinks" : "飲み物", 
+        "fruitandveg" : "果物と野菜", "ingredients" : "食材", "meals" : "食事",  "tastes" : "味など", "animals" : "動物", "seaanimals" : "海の生き物", "bugs" : "虫", "nature" : "自然", 
+        "months" : "月", "seasons" : "季節", "timesofday" : "一日の時間", "days" : "曜日", "countries" : "国", "family" : "家族", "people" : "人", "personalities" : "性格など", 
+        "actions1" : "動作など 1", "pastactions" : "したこと", "actions2" : "動作など 2", "dailyactivities" : "一日の生活", "frequency" : "頻度", "body" : "からだ", "clothes" : "衣類", 
+        "buildings" : "建物など", "directions" : "道案内", "locations" : "位置", "vehicles" : "乗り物", "school" : "学校", "subjects" : "教科", "instruments" : "楽器", 
+        "stationary" : "文房具", "commonitems" : "日常生活", "activities" : "遊びなど", "schoolevents" : "学校行事", "yearlyevents" : "年中行事", "conditions" : "状態", 
+        "descriptions" : "様子", "jobs" : "職業", "clubactivities" : "部活動", "clear": "削除", "next": "次", "play-again-button": "やり直し", "menu-button": "戻る"
+    },
+    jpn: {
+        "feelings" : "Feelings", "weather" : "Weather", "colors" : "Colors", "shapes" : "Shapes", "sports" : "Sports", "foods" : "Foods", "desserts" : "Desserts", "drinks" : "Drinks", 
+        "fruitandveg" : "Fruit and Veg", "ingredients" : "Ingredients", "meals" : "Meals",  "tastes" : "Tastes", "animals" : "Animals", "seaanimals" : "Sea Animals", "bugs" : "Bugs", 
+        "nature" : "Nature", "months" : "Months", "seasons" : "Seasons", "timesofday" : "Times", "days" : "Days", "countries" : "Countries", "family" : "Family", "people" : "People", 
+        "personalities" : "Personalities", "actions1" : "Actions 1", "pastactions" : "Past Actions", "actions2" : "Actions 2", "dailyactivities" : "Daily Activities", 
+        "frequency" : "Frequency", "body" : "Body", "clothes" : "Clothes", "buildings" : "Buildings", "directions" : "Directions", "locations" : "Locations", "vehicles" : "Vehicles", 
+        "school" : "School", "subjects" : "Subjects", "instruments" : "Instruments", "stationary" : "Stationary", "commonitems" : "Common Items", "activities" : "Activities", 
+        "schoolevents" : "School Events", "yearlyevents" : "Yearly Events", "conditions" : "Conditions", "descriptions" : "Descriptions", "jobs" : "Jobs", 
+        "clubactivities" : "Club Activities", "clear": "Clear All", "next": "Next", "play-again-button": "Play Again", "menu-button": "Main Menu"
+    }
+}
