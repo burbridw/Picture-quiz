@@ -240,7 +240,6 @@ const menuButton = document.getElementById("menu-button")
 const allSelectButtons = document.querySelectorAll(".imageSelect")
 allSelectButtons.forEach( (x) => {
     x.addEventListener("click",function() {
-        /*let tag = x.textContent.toLowerCase().split(" ").join("")*/
         let tag = x.getAttribute("id")
         beginSelection( selectObj[tag] )
     })
