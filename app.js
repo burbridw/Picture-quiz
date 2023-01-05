@@ -384,10 +384,14 @@ function renderGame(arr){
         if ( splitArr.includes(imageText) ) {
             if (!answered) {
                 score++
+                questionImageContainer.classList.add("correct-answer")
             }
             answered = true
             x.classList.add("correct-answer")
         } else {
+            if (!answered) {
+                questionImageContainer.classList.add("wrong-answer")
+            }
             answered = true
             x.classList.add("wrong-answer")
         }
@@ -406,6 +410,7 @@ function renderGame(arr){
     displayArr = []
     displayTextArr = []
     answered = false
+    questionImageContainer.className = "question-image-container"
     let allTextBoxes = document.querySelectorAll(".question-text-button")
     allTextBoxes.forEach( (x) => {
         x.textContent = ""
@@ -453,6 +458,7 @@ function renderGame(arr){
 function renderNext() {
     answersArr = []
     answered = false
+    questionImageContainer.className = "question-image-container"
     let allTextBoxes = document.querySelectorAll(".question-text-button")
     allTextBoxes.forEach( (x) => {
         x.textContent = ""
@@ -502,6 +508,7 @@ function renderLast() {
 function clearAll() {
     cardsContainer.classList.add("reduced")
     resultBox.classList.add("reduced")
+    questionImageContainer.className = "question-image-container"
     let currenterDiv = document.getElementById("select-container")
     currenterDiv.innerHTML = ""
     activeArr = []
